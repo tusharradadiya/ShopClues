@@ -1,4 +1,4 @@
-# database
+# Firebase
 
 A new Flutter project.
 
