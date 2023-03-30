@@ -1,5 +1,6 @@
 import 'package:database/screen/home/controller/homeController.dart';
 import 'package:database/utils/fbhelper.dart';
+import 'package:database/utils/sharedhelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -108,9 +109,11 @@ class _SignInPageState extends State<SignInPage> {
                               bool issignin = await FB_Helper.fb_helper
                                   .sign_in(txtemail.text, txtpass.text);
                               if (issignin) {
-                                homeController.changeScreen.value=0;
+                                homeController.changeScreen.value = 0;
 
-                                homeController.showNotiFication("Login Successful","Happy journey with ShopClues");
+                                homeController.showNotiFication(
+                                    "Login Successful",
+                                    "Happy journey with ShopClues");
                                 Get.offNamed('nav');
                                 txtpass.clear();
                                 txtemail.clear();
@@ -161,8 +164,10 @@ class _SignInPageState extends State<SignInPage> {
                                 bool isLogin = await FB_Helper.fb_helper
                                     .signInWithGoogle();
                                 if (isLogin) {
-                                  homeController.changeScreen.value=0;
-                                  homeController.showNotiFication("Login Successful","Happy journey with ShopClues");
+                                  homeController.changeScreen.value = 0;
+                                  homeController.showNotiFication(
+                                      "Login Successful",
+                                      "Happy journey with ShopClues");
                                   Get.offNamed('nav');
                                 }
                               },
@@ -198,7 +203,7 @@ class _SignInPageState extends State<SignInPage> {
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height - 730,
+                          height: MediaQuery.of(context).size.height - 800,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -222,6 +227,24 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                           ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 730,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Sharedhelper.sharedhelper.islogin(true);
+                            Get.offNamed('nav');
+                          },
+                          child: Text(
+                            "Guest Mode",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: Colors.white,
+                              decoration: TextDecoration.underline
+                            ),
+                          ),
                         ),
                       ],
                     ),

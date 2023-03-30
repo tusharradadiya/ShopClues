@@ -1,5 +1,6 @@
 import 'package:database/screen/home/controller/homeController.dart';
 import 'package:database/utils/fbhelper.dart';
+import 'package:database/utils/sharedhelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,9 @@ class _ProfilePageState extends State<ProfilePage> {
             Card(elevation: 5,
               child: ListTile(
                 leading: Icon(Icons.person,size: 40,),
-                title: Text("Name : ${FB_Helper.fb_helper.firebase.currentUser!.displayName}"),
-                subtitle: Text("Email   : ${FB_Helper.fb_helper.firebase.currentUser!.email}"),
+                title: Text("Name : ${FB_Helper.fb_helper.firebase.currentUser!=null?FB_Helper.fb_helper.firebase.currentUser!.displayName:"admin" }"),
+
+                subtitle: Text("Email   : ${FB_Helper.fb_helper.firebase.currentUser!=null ?FB_Helper.fb_helper.firebase.currentUser!.email:"admin@gmail.com" }"),
               ),
             ),
             Spacer(),
@@ -49,6 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           FB_Helper.fb_helper.logout();
                           homeController.showNotiFication(
                               'Logout Account', "Tap to Login");
+                          Sharedhelper.sharedhelper.islogin(false);
                           Get.offAllNamed('signin');
                         },
                         child: Text("Log Out"),

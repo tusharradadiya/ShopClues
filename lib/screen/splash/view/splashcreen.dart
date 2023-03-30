@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:database/utils/sharedhelper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:database/screen/splash/controller/splashControler.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,8 +18,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SplashController splashController = Get.put(SplashController());
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+
     splashController.holdScreen();
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Center(
