@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -239,10 +240,25 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       }
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
+                      return GridView.builder(
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 7,
+                              mainAxisSpacing: 7,
+                              mainAxisExtent: 200),
+                          itemCount: homeController.datalist.length,
+                          itemBuilder: (context, index) => Shimmer.fromColors(
+                            baseColor: Color(0xfccc4c4),
+                            highlightColor: Colors.white70,
+                            child: Card(
+                              child:Container(),
+                              elevation: 4,
+                            ),
+                          ),
+                        );},
                     stream: FB_Helper.fb_helper.readData(),
                   )
                 ],
